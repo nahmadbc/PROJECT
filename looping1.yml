@@ -1,0 +1,15 @@
+---
+- name: LOOPING and creating USERS
+  hosts: all
+  vars:
+    users:
+      - aa
+      - bb
+      - cc
+      - dd
+  tasks:
+    - name: adding multiple users via looping
+      user:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ users }}"
