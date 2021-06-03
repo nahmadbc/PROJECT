@@ -1,0 +1,28 @@
+---
+ - name: Using Handlers in Ansible
+   hosts: PROD
+   tasks:
+    - name: Installing a Package
+      yum:
+        name: httpd
+        state: installed
+      notify:
+        - start service
+        - add user
+        - copy file
+
+   handlers:
+    - name: start service
+      service:
+        name: httpd
+        state: started
+
+    - name: add user
+      user:
+        name: nasir
+        state: present
+
+    - name: copy file
+      copy:
+        src: /etc/hosts
+        dest: /root/folder
